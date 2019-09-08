@@ -7,14 +7,41 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController {
 
+    
+    
+    @IBOutlet var mapView: MKMapView! //drug from Main.storyboard
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-    }
+        
+        // set initial location in HKBU
+        let initialLocation = CLLocation(latitude: 22.3380838, longitude: 114.18186)
+        
+        let regionRadius: CLLocationDistance = 300
+        
+        let coordinateRegion = MKCoordinateRegion(
+            center: initialLocation.coordinate,
+            latitudinalMeters: regionRadius * 2.0,
+            longitudinalMeters: regionRadius * 2.0)
+        
+        mapView.setRegion(coordinateRegion, animated: true)
+        
+        mapView.showsUserLocation = true
+        
+        let waiHang = MKPointAnnotation()
+        
+        waiHang.coordinate = CLLocationCoordinate2D(latitude: 22.3380838, longitude: 114.18186)
+        waiHang.title = "Wai Hang"
+        waiHang.subtitle = "Sports Center"
+        
+        mapView.addAnnotation(waiHang)    }
     
 
     /*
